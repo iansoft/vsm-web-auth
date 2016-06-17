@@ -134,3 +134,23 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# Set the login URL
+WEBROOT = '/'
+LOGIN_URL = None
+LOGOUT_URL = None
+LOGIN_REDIRECT_URL = None
+
+if not WEBROOT.endswith('/'):
+    WEBROOT += '/'
+if LOGIN_URL is None:
+    LOGIN_URL = WEBROOT + 'auth/login/'
+if LOGOUT_URL is None:
+    LOGOUT_URL = WEBROOT + 'auth/logout/'
+if LOGIN_REDIRECT_URL is None:
+    LOGIN_REDIRECT_URL = WEBROOT
+
+
+# Set the Openstack keystone
+AUTHENTICATION_BACKENDS = ('openstack_auth.backend.KeystoneBackend',)
+OPENSTACK_KEYSTONE_URL = "http://139.196.208.113:5000/v3"
